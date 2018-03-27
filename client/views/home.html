@@ -1,0 +1,78 @@
+<div>
+    <div class="row header">
+        <h2>{{welcomeMessage}}</h1>
+    </div>
+
+    <div class="row message">
+        {{info.message}}
+    </div>
+    <div class="row" id="resultContainer">
+        <div>
+            <div class="col-md-10" id="results">
+                <span class="final">{{final_span}}</span>
+                <span class="interim">{{interim_span}}</span>
+                <p>
+            </div>
+            <button class="recordingButton" ng-click="startSpeechRec()" class="col-md-2">
+                <img src="{{start_img.src}}" alt="Start">
+            </button>
+        </div>
+    </div>
+
+    <div class="row resistanceValue">
+        <h3> {{resitanceCalculated}} </h3>
+    </div>
+    
+    <section class="box-position">
+            <div class="container" id="messagePop">
+                    <div class="col-xs-12 col-md-3 col-sm-4 pull-right">
+            
+                         <!-- Message box title    --> 
+                        <div class="panel">
+                           
+                            <div class="panel-heading top-bar" role="tab" id="open-message">
+                                
+                                <div class="col-md-10 col-xs-10">
+                                    <p class="panel-title"><span class="glyphicon glyphicon-comment"></span>   Quick Message</p>
+                                </div>
+                                        
+                                <div class="col-md-2 col-xs-2">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#message" aria-expanded="false" aria-controls="message">
+                                    <span class="glyphicon  glyphicon-plus"></span></a>
+                                </div>
+                                        
+                            </div>
+                        </div>
+                            
+                         <!-- Message body	--> 
+                         
+                            <div id="message" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <form  ng-submit="SubmitFeedback()">
+                                    
+                                        <div class="form-group ">
+                                          <input type="text" class="form-control" id="name" ng-model="feedback.name" placeholder="Name" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="text" class="form-control" id="subject" placeholder="Subject" ng-model="feedback.subject" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="email" class="form-control" id="email" placeholder="Email" ng-model="feedback.email" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                          <textarea type="text" class="form-control" id="message" placeholder="Message..." ng-model="feedback.message" required="required"></textarea>
+                                        </div>
+                                        
+                                         <div class="form-group">
+                                          <input type="submit" class="form-control btn-success" id="submit" value="Send">
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                            
+                    </div>
+            </div>
+            
+            </section>
+</div>

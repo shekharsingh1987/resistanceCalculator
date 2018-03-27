@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="templateApp" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resistositance</title>
+
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <ui-view></ui-view>
+    <script type="text/javascript" language="javascript" src="/resources/lib/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/resources/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/resources/lib/angular-ui-router/angular-ui-router.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" language="javascript" src="/index.js"></script>
+    <script type="text/javascript" language="javascript" src="/views/home.js"></script>
+
+    <script type="text/javascript" language="javascript" src="/ngScripts/apiServices.js"></script>
+    <script>
+        $(document).on('click', '.panel-heading span.glyphicon-plus', function (e) {
+            var $this = $(this);
+            if (!$this.hasClass('panel-collapse')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapse');
+                $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapse');
+                $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            }
+        });
+    </script>
+</body>
+
+</html>

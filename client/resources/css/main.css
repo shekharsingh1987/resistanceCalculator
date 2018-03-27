@@ -1,0 +1,74 @@
+.final {
+    color: black;
+    padding-right: 3px;
+}
+
+.interim {
+    color: gray;
+}
+
+.infoMessage {
+    font-size: 14px;
+    text-align: center;
+    color: #777;
+}
+
+.right {
+    float: right;
+}
+
+.sidebyside {
+    display: inline-block;
+    width: 45%;
+    min-height: 40px;
+    text-align: left;
+    vertical-align: top;
+}
+
+#results {
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 0px;
+    text-align: left;
+    height: 75px;
+    overflow-y: scroll;
+    margin-left: 100px;
+}
+
+.recordingButton {
+    height: 75px;
+    width: 85px;
+    margin-right: 45px;
+}
+
+
+/* Home page styling*/
+.header{
+    text-align: center;
+    height: 150px;
+}
+.message{
+    text-align: center;
+}
+.resistanceValue{
+    margin-top: 30px;
+    text-align: center;
+}
+#resultContainer{
+    
+}
+
+.glyphicon{color:#fff;}
+.panel{margin-bottom: 0px;}
+.panel-body{background-color:#FFF; border:1px solid#CCC;}
+.top-bar {background: #67b0d1; color: white; padding: 10px; position: relative; overflow: hidden; padding-right:5px;}
+.box-position{position: fixed;bottom: 0; width: 100%;}
+#messagePop{
+       
+    margin-right: 0px;
+    margin-left: 185px;
+    
+    padding-right: 6px;
+    padding-left: 15px;
+}
