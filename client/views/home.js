@@ -1,6 +1,6 @@
 app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService', function ($scope, $rootScope, $filter, resistorService) {
 
-    $scope.welcomeMessage = "Welcome to Your (Resistositance App) assistance of resistor on basis of voice.";
+    $scope.welcomeMessage = "Welcome to Your (Resistossitance App) assistance of resistor on basis of voice.";
     $scope.example = "orange,black,blue and silver";
     $scope.resistorColorCode = "";
     $scope.languages = [{ name: "English-US", value: "en-US" }, { name: "English-UK", value: "en-GB" }, { name: "English-IND", value: "en-IN" }]
@@ -143,13 +143,13 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService'
             var interim_transcript = '';
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
-                    final_transcript += event.results[i][0].transcript + " ";
+                    final_transcript += event.results[i][0].transcript + ". ";
                     resistorService.GetResistance(event.results[i][0].transcript).then(function (response) {
                         if (response.data.success) {
-                            console.log(response.data.band);
+                            // console.log(response.data.band);
                             $scope.resitanceCalculated = response.data.content + " - band: " + response.data.band;
                         } else {
-                            console.log(response.data.content)
+                            // console.log(response.data.content)
                             $scope.resitanceCalculated = response.data.content;
                         }
                     }, function (error) {
@@ -194,7 +194,9 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService'
     $scope.SubmitFeedback = function () {
         resistorService.SubmitFeedback($scope.feedback).then(function (response) {
             if (response.data.success) {
-                alert("Thank you! Your feedback has been submitted.");
+                $scope.feedback = {};
+                toastr.success("Thank you! Your feedback has been submitted.");
+                //alert("Thank you! Your feedback has been submitted.");
             }
             else {
                 console.log("Failed to log the message.")
