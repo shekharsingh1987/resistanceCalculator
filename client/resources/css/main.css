@@ -71,6 +71,6 @@
     padding-left: 15px;
 }
 
-.md-fab-bottom-right{
-    position: fixed !important;
-}
+.md-dialog-content{
+    max-height: 900px;
+    }

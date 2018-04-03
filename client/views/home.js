@@ -197,7 +197,7 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', '$mdDialog', 'res
     $scope.showConfirm = function (ev) {
 
         $mdDialog.show({
-            clickOutsideToClose: false,
+            clickOutsideToClose: true,
             scope: $scope,        // use parent scope in template
             preserveScope: true,  // do not forget this if use parent scope  
             templateUrl: 'views/feedbackDialog.html',
@@ -211,24 +211,22 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', '$mdDialog', 'res
                 }
             }
         });
-
-        // // Appending dialog to document.body to cover sidenav in docs app
-        // var confirm = $mdDialog.confirm()
-        //     .title('Your feedback can help us to improve !')
-        //     .textContent('All of the banks have agreed to forgive you your debts.')
-        //     .ariaLabel('Lucky day')
-        //     .targetEvent(ev)
-        //     .ok('Submit')
-        //     .cancel('Cancel');
-
-        // $mdDialog.show(confirm).then(function () {
-        //     $scope.SubmitFeedback();
-        // }, function () {
-        //     //$scope.status = 'You decided to keep your debt.';
-        // });
+        
     };
 
-
+    $scope.showResistorCode = function () {
+        $mdDialog.show({
+            clickOutsideToClose: true,
+            scope: $scope,        // use parent scope in template
+            preserveScope: true,  // do not forget this if use parent scope  
+            templateUrl: 'views/resistorColorCode.html',
+            controller: function DialogController($scope, $mdDialog) {                
+                $scope.cancel = function () {
+                    $mdDialog.cancel();
+                }
+            }
+        });
+    }
 
 
     $scope.SubmitFeedback = function () {
