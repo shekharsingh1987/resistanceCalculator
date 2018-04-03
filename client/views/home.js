@@ -1,6 +1,6 @@
-app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService', function ($scope, $rootScope, $filter, resistorService) {
+app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', '$mdDialog', 'resistorService', function ($scope, $rootScope, $filter, $mdDialog, resistorService) {
 
-    $scope.welcomeMessage = "Welcome to Your (Resistossitance App) assistance of resistor on basis of voice.";
+    $scope.welcomeMessage = "Welcome to Your (Resistossistance App) assistance of resistor on basis of voice.";
     $scope.example = "orange,black,blue and silver";
     $scope.resistorColorCode = "";
     $scope.languages = [{ name: "English-US", value: "en-US" }, { name: "English-UK", value: "en-GB" }, { name: "English-IND", value: "en-IN" }]
@@ -72,7 +72,7 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService'
 
 
 
-    //***************************************************  ******************************************************************************/
+    //*************************************************** Web Speech Api ******************************************************************************/
 
     var two_line = /\n\n/g;
     var one_line = /\n/g;
@@ -190,13 +190,52 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService'
             }
         }
     }
+    else {
+        showInfo('info_blocked');
+    }
+
+    $scope.showConfirm = function (ev) {
+
+        $mdDialog.show({
+            clickOutsideToClose: false,
+            scope: $scope,        // use parent scope in template
+            preserveScope: true,  // do not forget this if use parent scope  
+            templateUrl: 'views/feedbackDialog.html',
+            controller: function DialogController($scope, $mdDialog) {
+                $scope.closeDialog = function () {
+                    $scope.SubmitFeedback();
+                    $mdDialog.hide();
+                }
+                $scope.cancel = function () {
+                    $mdDialog.cancel();
+                }
+            }
+        });
+
+        // // Appending dialog to document.body to cover sidenav in docs app
+        // var confirm = $mdDialog.confirm()
+        //     .title('Your feedback can help us to improve !')
+        //     .textContent('All of the banks have agreed to forgive you your debts.')
+        //     .ariaLabel('Lucky day')
+        //     .targetEvent(ev)
+        //     .ok('Submit')
+        //     .cancel('Cancel');
+
+        // $mdDialog.show(confirm).then(function () {
+        //     $scope.SubmitFeedback();
+        // }, function () {
+        //     //$scope.status = 'You decided to keep your debt.';
+        // });
+    };
+
+
+
 
     $scope.SubmitFeedback = function () {
         resistorService.SubmitFeedback($scope.feedback).then(function (response) {
             if (response.data.success) {
                 $scope.feedback = {};
                 toastr.success("Thank you! Your feedback has been submitted.");
-                //alert("Thank you! Your feedback has been submitted.");
             }
             else {
                 console.log("Failed to log the message.")
@@ -204,8 +243,8 @@ app.controller("HomeCtrl", ['$scope', '$rootScope', '$filter', 'resistorService'
         }, function (error) {
             console.log(error)
         })
-
     }
+
 
 
 }]);

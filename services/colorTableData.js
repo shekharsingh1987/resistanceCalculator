@@ -39,7 +39,7 @@ var colorCodeTableDataHelper = {
             id: 5,
             name: "Green",
             codeName: "G",
-            value: 0,
+            value: 5,
             multiplier: 100000,
             tolerence: 0.5
         }, {
@@ -75,14 +75,14 @@ var colorCodeTableDataHelper = {
             name: "Gold",
             codeName: "Gd",
             value: 0,
-            multiplier: 0,
+            multiplier: 0.1,
             tolerence: 5
         }, {
             id: 11,
             name: "Silver",
             codeName: "S",
             value: 0,
-            multiplier: 0,
+            multiplier: 0.01,
             tolerence: 10
         }];
     }

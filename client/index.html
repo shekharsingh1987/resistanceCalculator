@@ -8,17 +8,28 @@
 
     <link rel="stylesheet" href="/resources/css/main.css">
     <link rel="stylesheet" href="/resources/css/toaster.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 </head>
 
 <body>
     <ui-view></ui-view>
     <script type="text/javascript" language="javascript" src="/resources/lib/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="/resources/lib/angular/angular.min.js"></script>
+    <!-- <script type="text/javascript" language="javascript" src="/resources/lib/angular/angular.min.js"></script> -->
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script type="text/javascript" language="javascript" src="/resources/lib/angular-ui-router/angular-ui-router.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" language="javascript" src="/resources/lib/toaster.js"></script>
 
 
@@ -27,21 +38,6 @@
     <script type="text/javascript" language="javascript" src="/views/home.js"></script>
 
     <script type="text/javascript" language="javascript" src="/ngScripts/apiServices.js"></script>
-    <script>
-        $(document).on('click', '.panel-heading span.glyphicon-plus', function (e) {
-            var $this = $(this);
-            if (!$this.hasClass('panel-collapse')) {
-                $this.parents('.panel').find('.panel-body').slideUp();
-                $this.addClass('panel-collapse');
-                $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
-
-            } else {
-                $this.parents('.panel').find('.panel-body').slideDown();
-                $this.removeClass('panel-collapse');
-                $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -28,18 +28,18 @@
 #results {
     font-size: 14px;
     font-weight: bold;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     padding: 0px;
     text-align: left;
     height: 75px;
-    overflow-y: scroll;
-    margin-left: 100px;
+    overflow-y: auto;
+    margin-left:0px;
 }
 
 .recordingButton {
     height: 75px;
     width: 85px;
-    margin-right: 45px;
+    margin-right: 0px;
 }
 
 
@@ -55,9 +55,7 @@
     margin-top: 30px;
     text-align: center;
 }
-#resultContainer{
-    
-}
+
 
 .glyphicon{color:#fff;}
 .panel{margin-bottom: 0px;}
@@ -71,4 +69,8 @@
     
     padding-right: 6px;
     padding-left: 15px;
+}
+
+.md-fab-bottom-right{
+    position: fixed !important;
 }
