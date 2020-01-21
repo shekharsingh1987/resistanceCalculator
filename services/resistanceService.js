@@ -14,9 +14,20 @@ var ConvertToUnit = function (rValue) {
     }
 }
 
-var GetColorCodeDigitForBand_4 = function (input, band) {
+
+var GetUnitMultiplier = function (suffix) {
+    var key = suffix.toLowerCase();
+    var multiplierArray = {
+        "kilo": 1000,
+        "mega": 1000000,
+        "giga": 1000000000
+    }
+    return multiplierArray[key];
+}
+
+var GetColorCodeDigitForBand = function (input, band) {
     var colorArray = input.split(',');
-    
+
     var significantValueString = "";
     var multiplier = 0;
     var tolerenceValue = "";
@@ -24,7 +35,7 @@ var GetColorCodeDigitForBand_4 = function (input, band) {
     for (var ca = 0; ca < colorArray.length; ca++) {
         if (colorArray[ca]) {
             var colorValue = colorCodeDataHelper.GetColorStandardDigitValue(colorArray[ca]);
-            if (colorValue) {                
+            if (colorValue) {
                 if (ca < (band - 2)) {
                     significantValueString += colorValue.value.toString();
                 }
@@ -46,19 +57,82 @@ var GetColorCodeDigitForBand_4 = function (input, band) {
     return resistance + " " + tolerenceValue;
 }
 
-var getResistance = function (bandType, input) {
-    return GetColorCodeDigitForBand_4(input, parseInt(bandType));
+var GetColorCodeFromValue = function (input) {
+    if (input) {
+        var responseResistance = input.split(',');
+        var resistanceValue = parseFloat(responseResistance[0]);
+
+
+        if (responseResistance.length > 1) {
+            var multiplier = GetUnitMultiplier(responseResistance[1]);
+            var completeResistanseValue = resistanceValue * multiplier;
+            //Find the color code.
+            var resitanceValueCharacterArray = completeResistanseValue.toString().split('');
+            var restValLength = resitanceValueCharacterArray.length;
+
+            //Logic for Band 4
+            var significantLength = restValLength - 2;
+            if (significantLength == -1) {
+                //ToDo: Add the logic if the resistance value is small and the length of 2
+                var colorBand_4 = "Black";
+                var element = resitanceValueCharacterArray[0]
+                var colorTableObject = colorCodeDataHelper.GetColorBandNameByValue(element);
+                colorBand_4 += "," + colorTableObject.name + ",Black";
+                return colorBand_4;
+            }
+            else if (significantLength >= 0 && significantLength <= 9) {
+                var colorBand_4 = "";
+                for (let index = 0; index < 2; index++) {
+                    const element = resitanceValueCharacterArray[index];
+                    var colorTableObject = colorCodeDataHelper.GetColorBandNameByValue(element);
+                    colorBand_4 += "," + colorTableObject.name;
+                }
+                var colorTableObjectForSignificant = colorCodeDataHelper.GetColorBandNameByValue(significantLength);
+                colorBand_4 += "," + colorTableObjectForSignificant.name;
+
+                if (colorBand_4.charAt(0) == ",") {
+                    colorBand_4 = colorBand_4.substring(1)
+                }
+                return colorBand_4;
+            }
+            else{
+                return "";
+            }
+
+            //ToDo: Logic for Band 5
+
+        }
+
+    }
+}
+
+
+
+
+var getResistance = function (band, input, cb_response) {
+
+    switch (band[0]) {
+        case "ResistorBand":
+            var resistossistance = GetColorCodeDigitForBand(input, parseInt(band[1]));
+            cb_response({ "success": true, "content": resistossistance, "band": band[1] });
+        case "ResistorColorCode":
+            var colorBands = GetColorCodeFromValue(input)
+            cb_response({ "success": true, "content": colorBands, "band": "4" });
+
+        default:
+            break;
+    }
 }
 
 var resitanceHelper = {
     GetResistance: function (req, res) {
         botService.process(req, function (aiResult) {
-
             if (aiResult.fulfillment.speech) {
                 var band = aiResult.metadata.intentName.split('_');
                 if (band.length > 1) {
-                    var resistossistance = getResistance(band[1], aiResult.fulfillment.speech)
-                    res.json({ "success": true, "content": resistossistance, "band": band[1] });
+                    getResistance(band, aiResult.fulfillment.speech, function (jsonResponse) {
+                        res.json(jsonResponse);
+                    });
                 }
                 else {
                     res.json({ "success": false, content: "We couldn't understand intent,Please try again saying in correct format." });

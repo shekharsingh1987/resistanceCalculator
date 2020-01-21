@@ -49,6 +49,7 @@ app.get('/', function (req, res) {
 //Resistance Services
 app.post('/api/v1/resistance/get', resistanceHelper.GetResistance);
 
+
 app.post('/api/v1/user/feedback', feedbackManager.Send);
 
 var port = process.env.PORT || 8080;
