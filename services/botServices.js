@@ -37,32 +37,36 @@ var apiaiRequest = {
         };
 
         // Send request and log result
-        const responses = sessionClient.detectIntent(request);
+        //const responses = sessionClient.detectIntent(request);
+
+        sessionClient.detectIntent(request).then((responses)=>{
+            const result = responses[0].queryResult;
+            if (result.intent) {
+                return cb_result(responses[0].queryResult);
+            } else {
+                return cb_error('No-Intent Matched!');
+            }
+        });
         // console.log('Detected intent');
         // const result = responses[0].queryResult;
         // console.log(result);
         // console.log(`  Query: ${result.queryText}`);
         // console.log(`  Response: ${result.fulfillmentText}`);
 
-
-        // if (result.intent) {
-        //     return cb_result(responses[0].queryResult);
-        // } else {
-        //     return cb_error('No-Intent Matched!');
-        // }
+        
 
         // var request = apiApp.textRequest(req.body.textMessage, {
         //     sessionId: getSessionId(req.body.sessionId)
         // });
 
-        responses.on('response', function (response) {
-            return cb_result(response[0].queryResult);
-        });
+        // responses.on('response', function (response) {
+        //     return cb_result(response[0].queryResult);
+        // });
 
-        responses.on('error', function (error) {
-            return cb_error(error);
-        });
-        responses.end();
+        // responses.on('error', function (error) {
+        //     return cb_error(error);
+        // });
+        // responses.end();
     }
 };
 
