@@ -37,32 +37,32 @@ var apiaiRequest = {
         };
 
         // Send request and log result
-        const responses = await sessionClient.detectIntent(request);
-        console.log('Detected intent');
-        const result = responses[0].queryResult;
-        console.log(result);
-        console.log(`  Query: ${result.queryText}`);
-        console.log(`  Response: ${result.fulfillmentText}`);
+        const responses = sessionClient.detectIntent(request);
+        // console.log('Detected intent');
+        // const result = responses[0].queryResult;
+        // console.log(result);
+        // console.log(`  Query: ${result.queryText}`);
+        // console.log(`  Response: ${result.fulfillmentText}`);
 
 
-        if (result.intent) {
-            return cb_result(responses[0].queryResult);
-        } else {
-            return cb_error('No-Intent Matched!');
-        }
+        // if (result.intent) {
+        //     return cb_result(responses[0].queryResult);
+        // } else {
+        //     return cb_error('No-Intent Matched!');
+        // }
 
         // var request = apiApp.textRequest(req.body.textMessage, {
         //     sessionId: getSessionId(req.body.sessionId)
         // });
 
-        // request.on('response', function (response) {
-        //     return cb_result(response.result);
-        // });
+        responses.on('response', function (response) {
+            return cb_result(response[0].queryResult);
+        });
 
-        // request.on('error', function (error) {
-        //     return cb_error(error);
-        // });
-        // request.end();
+        responses.on('error', function (error) {
+            return cb_error(error);
+        });
+        responses.end();
     }
 };
 
