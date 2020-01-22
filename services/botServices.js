@@ -42,7 +42,7 @@ var apiaiRequest = {
         sessionClient.detectIntent(request).then((responses)=>{
             const result = responses[0].queryResult;
             if (result.intent) {
-                return cb_result(responses[0].queryResult);
+                return cb_result(result);
             } else {
                 return cb_error('No-Intent Matched!');
             }
