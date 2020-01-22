@@ -127,10 +127,11 @@ var getResistance = function (band, input, cb_response) {
 var resitanceHelper = {
     GetResistance: function (req, res) {
         botService.process(req, function (aiResult) {
-            if (aiResult.fulfillment.speech) {
-                var band = aiResult.metadata.intentName.split('_');
+            console.log(aiResult);
+            if (aiResult.fulfillmentText) {
+                var band = aiResult.intent.split('_');
                 if (band.length > 1) {
-                    getResistance(band, aiResult.fulfillment.speech, function (jsonResponse) {
+                    getResistance(band, aiResult.fulfillmentText, function (jsonResponse) {
                         res.json(jsonResponse);
                     });
                 }
