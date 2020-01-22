@@ -1,29 +1,69 @@
 
+/* Legacy Code Used Api.Ai 
+
 var apiai = require('apiai');
-var apiApp = apiai("306d73e591d14a7e944ea92feaf65945");//502a8828a2ba4179abe9b9f55ec85d6d
+
+var apiApp = apiai("306d73e591d14a7e944ea92feaf65945");
 var getSessionId = function (session) {    
     if(!session){
-        return "0d6036e2370c4cb59ba989763c69d1aa";
+        return uuid.v4();
     }else{
         return session;
     }
 }
+*/
 
+const dialogflow = require('dialogflow');
+const uuid = require('uuid');
+const projectId = '306d73e591d14a7e944ea92feaf65945';
+const sessionId = uuid.v4();
+const languageCode = 'en-US';
 
 var apiaiRequest = {
     process: function (req, cb_result, cb_error) {
-        var request = apiApp.textRequest(req.body.textMessage, {
-            sessionId: getSessionId(req.body.sessionId)
-        });
 
-        request.on('response', function (response) {
-            return cb_result(response.result);
-        });
+        const sessionClient = new dialogflow.SessionsClient();
+        const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
-        request.on('error', function (error) {
-            return cb_error(error);
-        });
-        request.end();
+        // The text query request.
+        const request = {
+            session: sessionPath,
+            queryInput: {
+                text: {
+                    text: req.body.textMessage,
+                    languageCode: 'en-US',
+                },
+            },
+        };
+
+        // Send request and log result
+        const responses = await sessionClient.detectIntent(request);
+        console.log('Detected intent');
+        const result = responses[0].queryResult;
+        console.log(result);
+        console.log(`  Query: ${result.queryText}`);
+        console.log(`  Response: ${result.fulfillmentText}`);
+
+
+        if (result.intent) {
+            return cb_result(responses[0].queryResult);
+        } else {
+            return cb_error('No-Intent Matched!');
+        }
+
+        // var request = apiApp.textRequest(req.body.textMessage, {
+        //     sessionId: getSessionId(req.body.sessionId)
+        // });
+
+        // request.on('response', function (response) {
+        //     return cb_result(response.result);
+        // });
+
+        // request.on('error', function (error) {
+        //     return cb_error(error);
+        // });
+        // request.end();
     }
 };
+
 module.exports = apiaiRequest; 
