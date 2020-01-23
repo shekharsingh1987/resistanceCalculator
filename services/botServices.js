@@ -40,12 +40,13 @@ var apiaiRequest = {
         //const responses = sessionClient.detectIntent(request);
 
         sessionClient.detectIntent(request).then((responses)=>{
-            const result = responses[0].queryResult;
-            if (result.intent) {
-                return cb_result(result);
-            } else {
-                return cb_error('No-Intent Matched!');
-            }
+            //const result = responses[0].queryResult;
+            // if (result.intent) {
+            //     return cb_result(result);
+            // } else {
+            //     return cb_error('No-Intent Matched!');
+            // }
+            console.log(responses);
         });
         // console.log('Detected intent');
         // const result = responses[0].queryResult;
