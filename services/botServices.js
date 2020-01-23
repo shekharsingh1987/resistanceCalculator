@@ -1,21 +1,8 @@
-/* Legacy Code Used Api.Ai 
-
-var apiai = require('apiai');
-
-var apiApp = apiai("306d73e591d14a7e944ea92feaf65945");
-var getSessionId = function (session) {    
-    if(!session){
-        return uuid.v4();
-    }else{
-        return session;
-    }
-}
-*/
 
 const dialogflow = require("dialogflow");
 const uuid = require("uuid");
 
-const projectId = "306d73e591d14a7e944ea92feaf65945";
+const projectId = "resistossistance-12243";
 const languageCode = "en-US";
 
 var apiaiRequest = {
