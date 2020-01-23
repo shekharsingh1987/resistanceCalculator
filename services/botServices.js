@@ -8,7 +8,9 @@ const languageCode = "en-US";
 var apiaiRequest = {
   process: function(req, cb_result, cb_error) {
     const sessionId = uuid.v4();
-    const sessionClient = new dialogflow.SessionsClient();
+    const sessionClient = new dialogflow.SessionsClient({
+      "keyFilename":"Resistossistance-e6b8f5164f65.json"
+    });
     const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
     // The text query request.
@@ -25,9 +27,8 @@ var apiaiRequest = {
     // Send request and log result
     //const responses = sessionClient.detectIntent(request);
 
-    sessionClient.detectIntent(request).then(responses => {
-      console.log(responses);
-      const result = responses[0].queryResult;
+    sessionClient.detectIntent(request).then(responses => {      
+      const result = responses[0].queryResult;      
       if (result.intent) {
         return cb_result(result);
       } else {

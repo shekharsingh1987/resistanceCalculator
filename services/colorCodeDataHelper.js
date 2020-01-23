@@ -13,10 +13,10 @@ var colorCodeDataHelper = {
     GetColorCodeTable: function () {
         return colorDataTable.GetColorCodeTable();
     },
-    GetColorBandNameByValue: function(value){
-        var colorDataObject = colorDataTable.GetColorCodeTable();
+    GetColorBandNameByValue: function(value){ 
+        var colorDataObject = colorDataTable.GetColorCodeTable();  
         for (var c = 0; c < colorDataObject.length; c++) {
-            if (colorDataObject[c].value === value) {
+            if (colorDataObject[c].value.toString() === value.toString()) {                
                 return colorDataObject[c];
             }
         }
