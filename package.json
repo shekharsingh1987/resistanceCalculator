@@ -12,7 +12,7 @@
   "dependencies": {
     "angular-material": "^1.1.8",
     "apiai": "^4.0.3",
-    "dialogflow": "^1.1.1",
+    "dialogflow": "^4.0.3",
     "express": "^4.17.3",
     "morgan": "^1.9.1",
     "nodemailer": "^6.6.1",
